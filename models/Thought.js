@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const thoughtSchema = new mongoose.Schema({
     thoughtText: {type: String, required: true, minLength: 1, maxLength: 280 },
     createdAt: {},
-    username: {type: String, required: true},
+    username: {type: String, required: true, ref: 'User'},
     reactions: [reactionSchema],
 
     toJSON: {
@@ -13,7 +13,7 @@ const thoughtSchema = new mongoose.Schema({
 })
 
 const reactionSchema = new Schema({
-    reactionId: {},
+    reactionId: {type: Schema.Types.ObjectId, default: () => new Types.ObjectId()},
     reactionBody: {type: String, required: true, maxLength: 280},
     username: {type: String, required: true},
     createdAt: {}
